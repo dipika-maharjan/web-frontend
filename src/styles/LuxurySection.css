@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+.luxury-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.luxury-heading {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #F4ECE3, #E8E5DE); 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.luxury-heading h1 {
+    font-size: 2.5rem; 
+    letter-spacing: 1.5px; 
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative; 
+}
+
+.luxury-frontimage img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    max-height: 500px;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.luxury-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+    padding: 20px; 
+}
+
+.luxury-description p {
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    line-height: 1.6;
+}
+
+.luxury-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 10px; 
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+.luxury-section h2 {
+    font-size: 24px; 
+    color: #333333; 
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.luxury-section h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #B19F6F; 
+    margin: 10px auto 0;
+    border-radius: 1px;
+}
+
+.luxury-section p {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.luxury-box {
+    height: 500px; 
+    width: 30%; 
+    margin: 20px; 
+}
+
+.luxury-image img {
+    height: 350px; 
+    width: 100%; 
+    object-fit: cover; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
+    border-radius: 8px; 
+    transition: all 0.3s ease-in-out; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.luxury-image img:hover {
+    cursor: pointer;
+    animation: shrinkEffect 0.5s ease-in-out forwards; 
+}
+
+@keyframes shrinkEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9); 
+        opacity: 0.9; 
+    }
+}
+
+.luxury-content {
+    text-align: center;
+    margin-left: 14px;
+    margin-right: 14px;
+}

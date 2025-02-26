@@ -1,0 +1,63 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Ethereal", "Baskerville Old Face", "Baskerville", serif;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    font-size: 24px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column; /* Stack the heading and content */
+    align-items: center; 
+    background-color: #f6f6f6;
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center; 
+}
+
+.box h2 {
+    margin-top: 50px;
+    margin-bottom: 35px;
+    font-size: 24px;
+}
+
+.box-content {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; /* Wrap items to the next line if needed */
+    gap: 60px; 
+}
+
+.box-content div {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.box-image {
+    height: 225px; 
+    width: 225px; 
+    background-size: cover; 
+    background-position: center; 
+    border-radius: 10px; 
+    margin-bottom: 10px; 
+}   
+
+.box-content p {
+    font-size: 16px;
+    color: #333;
+}
+
+.box-content p:hover{
+    cursor: pointer;
+    color: #B19F6F;
+}
