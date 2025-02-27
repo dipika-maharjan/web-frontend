@@ -1,11 +1,28 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"; 
 import axios from "axios";
+
+
+export const useSaveBooking = () => {
+  const queryClient = useQueryClient(); // Access to query client
+
+  return useMutation({
+    mutationKey: "SAVE_BOOKING_DATA",
+    mutationFn: (data) => {
+      return axios.post("http://localhost:8080/api/booking/create_booking", data);
+    },
+    onSuccess: () => {
+      // Invalidate the bookings query to trigger a re-fetch
+      queryClient.invalidateQueries("GET_BOOKING_LIST");
+    },
+  });
+};
+
 
 export const useGetBookings = () => {
   return useQuery({
     queryKey: ["GET_BOOKING_LIST"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:8080/api/booking/view_booking");
+      const response = await axios.get("http://localhost:8080/api/bookings/view_bookings");
       return response.data;
     },
   });
@@ -22,14 +39,6 @@ export const useGetBookingById = (id) => {
   });
 };
 
-export const useSaveBooking = () => {
-  return useMutation({
-    mutationKey: "SAVE_BOOKING_DATA",
-    mutationFn: (data) => {
-      return axios.post("http://localhost:8080/api/booking/create_booking", data);
-    },
-  });
-};
 
 export const useUpdateBooking = () => {
   return useMutation({

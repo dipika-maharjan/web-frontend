@@ -2,28 +2,49 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "../api.css";
+import "../../../styles/Dashboard.css";
 
 // Fetch data functions
 const fetchTotalCustomers = async () => {
-  const response = await axios.get("http://localhost:8080/api/customer/view_customers");
+  const token = localStorage.getItem("token");
+  const response = await axios.get("http://localhost:8080/api/customer/view_customers", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
   return response.data.length;
 };
 
 const fetchTotalBookings = async () => {
-  const response = await axios.get("http://localhost:8080/api/booking/view_bookings");
-  return response.data.length;
+  const token = localStorage.getItem("token");
+  try {
+    const response = await axios.get("http://localhost:8080/api/booking/view_bookings", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    
+    // Check if the response is valid, if not return 0
+    if (response.data && Array.isArray(response.data)) {
+      return response.data.length;
+    } else {
+      return 0; // Return 0 if the response data is invalid or empty
+    }
+  } catch (error) {
+    console.error("Error fetching total bookings:", error);
+    return 0; // Return 0 if there is an error fetching data
+  }
 };
 
+
 const fetchTotalDesigns = async () => {
-  const response = await axios.get("http://localhost:8080/api/design/view_design");
+  const token = localStorage.getItem("token");
+  const response = await axios.get("http://localhost:8080/api/design/view_design", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
   return response.data.length;
 };
 
 function Dashboard() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+
   // Check authentication on mount
   useEffect(() => {
     const token = localStorage.getItem("token");

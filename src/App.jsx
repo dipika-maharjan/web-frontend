@@ -106,8 +106,6 @@ const router = createBrowserRouter([
       { path: "customer", element: <CustomerIndex /> },
       { path: "customer/:id", element: <CustomerForm /> },
       { path: "customer/form", element: <CustomerForm /> },
-      { path: "user", element: <UserIndex /> },
-      { path: "user/form", element: <UserForm /> },
       { path: "design", element: <DesignIndex /> },
       { path: "design/form", element: <DesignForm /> },
       { path: "design/:id", element: <DesignForm /> },
