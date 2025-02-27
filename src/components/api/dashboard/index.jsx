@@ -102,7 +102,6 @@ function Dashboard() {
           <li className="menu-item" onClick={() => navigate("/admin/customer")}>Customers</li>
           <li className="menu-item" onClick={() => navigate("/admin/booking")}>Bookings</li>
           <li className="menu-item" onClick={() => navigate("/admin/design")}>Designs</li>
-          <li className="menu-item" onClick={() => navigate("/admin/user")}>Users</li>
         </ul>
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>

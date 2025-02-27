@@ -5,7 +5,7 @@ export const useGetCustomers = () => {
   return useQuery({
     queryKey: ["GET_CUSTOMER_LIST"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:8080/api/customer/view_customer");
+      const response = await axios.get("http://localhost:8080/api/customer/view_customers");
       return response.data;
     },
   });

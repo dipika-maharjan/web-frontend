@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetCustomers, useDeleteCustomer } from "./query";
+import '../../../styles/CustomerDashboard.css';
 
 function CustomerIndex() {
   const { data: customerList, refetch } = useGetCustomers();
@@ -8,7 +9,12 @@ function CustomerIndex() {
 
   const deleteItem = (id) => {
     if (!id) return;
-    deleteApi.mutate(id, { onSuccess: refetch });
+
+    deleteApi.mutate(id, {
+      onSuccess: () => {
+        refetch(); // Refresh customer list
+      },
+    });
   };
 
   return (
@@ -16,15 +22,13 @@ function CustomerIndex() {
       <div className="header">
         <h2 className="section-title">Customers</h2>
         <div className="button-group">
-          <button
-            className="btn-back"
-            onClick={() => navigate("/admin/dashboard")}
-          >
+          <button className="btn-back" onClick={() => navigate("/admin/dashboard")}>
             Back to Dashboard
           </button>
         </div>
       </div>
-      <table className="table">
+      
+      <table>
         <thead>
           <tr>
             <th>Full Name</th>
@@ -34,27 +38,22 @@ function CustomerIndex() {
           </tr>
         </thead>
         <tbody>
-          {customerList?.map((customer) => (
-            <tr key={customer.id}>
-              <td>{customer.full_name}</td>
-              <td>{customer.email}</td>
-              <td>{customer.contact_number}</td>
-              <td>
-                <button
-                  className="btn-edit"
-                  onClick={() => navigate(`/admin/customer/${customer.id}`)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn-delete"
-                  onClick={() => deleteItem(customer.id)}
-                >
-                  Delete
-                </button>
-              </td>
+          {customerList && customerList.length > 0 ? (
+            customerList.map((customer) => (
+              <tr key={customer.id}>
+                <td>{customer.full_name}</td>
+                <td>{customer.email}</td>
+                <td>{customer.contact_number}</td>
+                <td>
+                  <button onClick={() => deleteItem(customer.id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No customers found</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

@@ -1,4 +1,3 @@
-// src/api.js
 import axios from 'axios';
 
 // Define the base URL for your API
@@ -14,14 +13,28 @@ export const login = async (email, password) => {
   }
 };
 
-// Function to handle signup
-export const signup = async (username, email, password) => {
+// Function to handle signup (Updated to include fullName and contact)
+export const signup = async (full_name, contact_number, username, email, password) => {
   try {
-    const response = await axios.post(`${BASE_URL}/register`, { username, email, password });
+    const response = await axios.post(`${BASE_URL}/register`, {
+      full_name,
+      contact_number,
+      username,
+      email,
+      password
+    });
     return response.data;
   } catch (error) {
     throw error.response?.data?.message || 'Registration failed. Please try again.';
   }
 };
 
-// Other API functions can be added here as needed (e.g., fetching user data, etc.)
+// Function to fetch all registered customers (For admin panel)
+export const getCustomers = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/all`);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch customers.';
+  }
+};
