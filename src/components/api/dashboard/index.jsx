@@ -19,18 +19,23 @@ const fetchTotalBookings = async () => {
     const response = await axios.get("http://localhost:8080/api/booking/view_bookings", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    
-    // Check if the response is valid, if not return 0
-    if (response.data && Array.isArray(response.data)) {
-      return response.data.length;
+
+    // Log the response to check its structure (debugging step)
+    console.log('Bookings API Response:', response.data);
+
+    // Ensure the bookings data is accessible under 'response.data.bookings'
+    if (response.data && Array.isArray(response.data.bookings)) {
+      return response.data.bookings.length; // Return the length of the bookings array
     } else {
-      return 0; // Return 0 if the response data is invalid or empty
+      return 0; // Return 0 if the data format is not as expected
     }
   } catch (error) {
     console.error("Error fetching total bookings:", error);
-    return 0; // Return 0 if there is an error fetching data
+    return 0; // Return 0 in case of error
   }
 };
+
+
 
 
 const fetchTotalDesigns = async () => {

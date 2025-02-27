@@ -30,8 +30,6 @@ const AdminLogin = lazy(() => import("./components/pages/private/AdminLogin"));
 const DashboardIndex = lazy(() => import("./components/api/dashboard/index"));
 const CustomerIndex = lazy(() => import("./components/api/customer/index"));
 const CustomerForm = lazy(() => import("./components/api/customer/form"));
-const UserIndex = lazy(() => import("./components/api/user/index"));
-const UserForm = lazy(() => import("./components/api/user/form"));
 const DesignIndex = lazy(() => import("./components/api/design/index"));
 const DesignForm = lazy(() => import("./components/api/design/form"));
 const BookingIndex = lazy(() => import("./components/api/booking/index"));
