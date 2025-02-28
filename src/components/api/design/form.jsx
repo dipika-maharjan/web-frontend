@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useGetById, useSaveDesign, useUpdateDesign } from "./query";
-import '../../../styles/AdminFormDesign.css'
+import "../../../styles/AdminDesignForm.css";
 
 function DesignForm() {
   const { id } = useParams(); // Extract the `id` parameter from the URL
@@ -17,6 +17,8 @@ function DesignForm() {
     defaultValues: {
       title: design?.title || "",
       description: design?.description || "",
+      room: design?.room || "",
+      style: design?.style || "",
     },
   });
 
@@ -26,6 +28,8 @@ function DesignForm() {
       reset({
         title: design.title,
         description: design.description,
+        room: design.room,
+        style: design.style,
       });
     }
   }, [design, reset]);
@@ -38,6 +42,8 @@ function DesignForm() {
     const dataToSend = new FormData();
     dataToSend.append("title", formData.title);
     dataToSend.append("description", formData.description);
+    dataToSend.append("room", formData.room);
+    dataToSend.append("style", formData.style);
 
     // Append image if it exists
     if (formData.image?.[0]) {
@@ -97,6 +103,28 @@ function DesignForm() {
         <div className="form-group">
           <label>Description</label>
           <textarea {...register("description")} required className="form-input" />
+        </div>
+
+        <div className="form-group">
+          <label>Room</label>
+          <select {...register("room")} required className="form-input">
+            <option value="">Select Room</option>
+            <option value="Living Room">Living Room</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Office">Office</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Style</label>
+          <select {...register("style")} required className="form-input">
+            <option value="">Select Style</option>
+            <option value="Modern">Modern</option>
+            <option value="Rustic">Rustic</option>
+            <option value="Traditional">Traditional</option>
+            <option value="Minimalist">Minimalist</option>
+          </select>
         </div>
 
         <div className="form-group">

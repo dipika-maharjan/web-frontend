@@ -61,6 +61,12 @@
     outline: none;
   }
   
+  /* Style for select dropdowns */
+  .form-input[type="select"] {
+    appearance: none; /* Remove default arrow */
+    background-color: white;
+  }
+  
   .submit-button {
     padding: 10px 15px;
     background-color: #28a745;
