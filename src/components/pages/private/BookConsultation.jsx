@@ -22,27 +22,36 @@ function BookConsultation() {
   const bookConsultation = useMutation({
     mutationFn: async (data) => {
       const token = localStorage.getItem("token");
-  
+
       // Ensure room and design are renamed to room_name and design_name
       const bookingData = {
         ...data,
         room_name: data.room, // room should be mapped to room_name
         design_name: data.design, // design should be mapped to design_name
       };
-  
+
       return axios.post("http://localhost:8080/api/booking/create_bookings", bookingData, {
         headers: { Authorization: `Bearer ${token}` },
       });
     },
     onSuccess: () => {
       alert("✅ Booking successful!");
-      navigate("/dashboard");
+      setFormData({
+        full_name: "",
+        contact_number: "",
+        email: "",
+        room: "",
+        design: "",
+        date: "",
+        description: "",
+      });
+      setIsLoading(false);
     },
     onError: (error) => {
       alert(`❌ Booking failed: ${error.response?.data?.message || "Unknown error"}`);
+      setIsLoading(false);
     },
   });
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,7 +91,6 @@ function BookConsultation() {
     }
 
     bookConsultation.mutate(formData);
-    setIsLoading(false);
   };
 
   return (
@@ -126,8 +134,8 @@ function BookConsultation() {
               <select name="design" value={formData.design} onChange={handleChange} required>
                 <option value="">Select Design</option>
                 <option value="Rustic">Rustic</option>
-                <option value="Bohemian">Bohemian</option>
-                <option value="Contemporary-Minimalist">Contemporary-Minimalist</option>
+                <option value="Modern">Modern</option>
+                <option value="Minimalist">Minimalist</option>
                 <option value="Traditional">Traditional</option>
               </select>
             </div>

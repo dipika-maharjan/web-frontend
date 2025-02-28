@@ -113,6 +113,7 @@ function DesignForm() {
             <option value="Bedroom">Bedroom</option>
             <option value="Kitchen">Kitchen</option>
             <option value="Office">Office</option>
+            <option value="Dining">Dining</option>
           </select>
         </div>
 
