@@ -65,7 +65,7 @@ function DesignIndex() {
               <td>
                 <button
                   className="btn-edit"
-                  onClick={() => navigate(`/admin/design/${design.id}`)}
+                  onClick={() => navigate(`/admin/design/edit/${design.id}`)} // Updated this line
                 >
                   ✏️ Edit
                 </button>

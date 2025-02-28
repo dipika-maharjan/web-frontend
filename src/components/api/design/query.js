@@ -19,7 +19,7 @@ export const useGetById = (id) => {
   return useQuery({
     queryKey: ["GET_DESIGN_BY_ID", id], // Include id to trigger refetch on change
     queryFn: async () => {
-      const response = await axios.get(`${API_BASE_URL}/view_design/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/${id}`); // Updated endpoint
       return response.data;
     },
     enabled: !!id, // Fetch only when id is available

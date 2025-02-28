@@ -1,112 +1,112 @@
-import { useForm } from "react-hook-form";
-import { useSaveDesign, useUpdateDesign, useGetById } from "./query";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useMemo } from "react";
-import "../../../styles/DesignForm.css";
+import { useForm } from "react-hook-form";
+import { useGetById, useSaveDesign, useUpdateDesign } from "./query";
+import '../../../styles/AdminFormDesign.css'
 
 function DesignForm() {
-  const params = useParams();
+  const { id } = useParams(); // Extract the `id` parameter from the URL
   const navigate = useNavigate();
+  const isEditMode = !!id; // Check if we're in edit mode
 
-  // Debugging: Log params.id
-  console.log("params.id:", params?.id);
+  // Fetch design data if in edit mode
+  const { data: design, isLoading } = useGetById(id);
 
-  // Only fetch design data if params.id is valid
-  const { data, isLoading } = useGetById(params?.id);
-  const getById = data || {};
-
-  // UseMemo to prevent unnecessary resets
-  const defaultValues = useMemo(() => ({
-    title: getById?.title || "",
-    description: getById?.description || "",
-  }), [getById]);
-
+  // Initialize the form with default values
   const { register, handleSubmit, reset } = useForm({
-    defaultValues, 
-    mode: "onChange",
+    defaultValues: {
+      title: design?.title || "",
+      description: design?.description || "",
+    },
   });
 
-  // Only reset when defaultValues change
-  useEffect(() => {
-    if (getById?.title && getById?.description) {
-      reset(defaultValues); // Reset only when data is available
+  // Reset the form when design data is fetched
+  React.useEffect(() => {
+    if (design) {
+      reset({
+        title: design.title,
+        description: design.description,
+      });
     }
-  }, [defaultValues, getById, reset]);
+  }, [design, reset]);
 
+  // Save or update design
   const saveApi = useSaveDesign();
-  const updateData = useUpdateDesign();
+  const updateApi = useUpdateDesign();
 
-  const submit = (formData) => {
+  const onSubmit = (formData) => {
     const dataToSend = new FormData();
-    dataToSend.append("title", formData?.title);
-    dataToSend.append("description", formData?.description);
+    dataToSend.append("title", formData.title);
+    dataToSend.append("description", formData.description);
 
-    // Fix file upload handling
-    if (formData?.image?.[0]) {
+    // Append image if it exists
+    if (formData.image?.[0]) {
       dataToSend.append("image", formData.image[0]);
     }
 
-    // If we have an ID (edit), we update the design; otherwise, we create a new design
-    if (params?.id) {
-      updateData.mutate(
-        { id: params.id, formData: dataToSend },
+    if (isEditMode) {
+      // Update existing design
+      updateApi.mutate(
+        { id, formData: dataToSend },
         {
           onSuccess: () => {
-            alert("Updated Successfully!");
-            navigate("/admin/design"); // Navigate back to design list
+            alert("Design updated successfully!");
+            navigate("/admin/design"); // Navigate back to the design list
+          },
+          onError: (error) => {
+            alert("Failed to update design. Please try again.");
+            console.error(error);
           },
         }
       );
     } else {
+      // Create new design
       saveApi.mutate(dataToSend, {
         onSuccess: () => {
-          alert("Created Successfully!");
-          reset(); // Reset the form after success
+          alert("Design created successfully!");
+          reset(); // Reset the form
           navigate("/admin/design"); // Navigate back to the design list
+        },
+        onError: (error) => {
+          alert("Failed to create design. Please try again.");
+          console.error(error);
         },
       });
     }
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading design data...</p>;
   }
 
   return (
-    <div className="design-form">
-      <button className="btn-back" onClick={() => navigate("/admin/design")}>
-         Back to Designs
+    <div className="design-form-container">
+      <h1>{isEditMode ? "Edit Design" : "Create Design"}</h1>
+      <button
+        className="back-button"
+        onClick={() => navigate("/admin/design")}
+      >
+        ← Back to Designs
       </button>
-      <form onSubmit={handleSubmit(submit)} encType="multipart/form-data">
-        <div>
+      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="design-form">
+        <div className="form-group">
           <label>Title</label>
-          <input type="text" {...register("title")} required />
+          <input type="text" {...register("title")} required className="form-input" />
         </div>
 
-        <div>
-          <label>Image</label>
-          <input type="file" {...register("image")} />
-        </div>
-
-        <div>
-          {getById?.image && (
-            <img
-              src={`http://localhost:8080/design_images/${getById.image}`}
-              alt="Design Preview"
-              height="100"
-              onError={(e) => (e.target.src = "https://via.placeholder.com/100")}
-            />
-          )}
-        </div>
-
-        <div>
+        <div className="form-group">
           <label>Description</label>
-          <textarea {...register("description")} required />
+          <textarea {...register("description")} required className="form-input" />
         </div>
 
-        <div>
-          <input type="submit" value={params?.id ? "Update Design" : "Add Design"} />
+        <div className="form-group">
+          <label>Image</label>
+          <input type="file" {...register("image")} className="form-input" />
         </div>
+
+        <button type="submit" className="submit-button">
+          {isEditMode ? "Update Design" : "Create Design"}
+        </button>
       </form>
     </div>
   );
