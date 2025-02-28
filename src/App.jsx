@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Profile from "./components/pages/private/Profile";
 
 // Lazy Load Components
 const Homepage = lazy(() => import("./components/pages/private/Homepage"));
@@ -50,7 +51,6 @@ const PrivateRoute = () => {
   return isAuthenticated ? <Outlet /> : <Navigate to="/admin/login" replace />;
 };
 
-
 // Layout Wrapper to Include Navbar/Footer
 const UserLayout = () => (
   <>
@@ -74,6 +74,7 @@ const router = createBrowserRouter([
       {
         element: <PrivateUserRoute />, // Protects all other routes
         children: [
+          { path: "profile", element: <Profile /> },
           { path: "bookconsultation", element: <BookConsultation /> },
           { path: "bedsection", element: <BedSection /> },
           { path: "bohemiansection", element: <BohemianSection /> },
@@ -92,7 +93,6 @@ const router = createBrowserRouter([
       }
     ]
   },
-  
 
   // Admin Routes (Protected by Admin Authentication)
   {
@@ -105,8 +105,8 @@ const router = createBrowserRouter([
       { path: "customer/:id", element: <CustomerForm /> },
       { path: "customer/form", element: <CustomerForm /> },
       { path: "design", element: <DesignIndex /> },
-      { path: "design/form", element: <DesignForm /> },
-      { path: "design/:id", element: <DesignForm /> },
+      { path: "design/create", element: <DesignForm /> }, // Route for creating a new design
+      { path: "design/edit/:id", element: <DesignForm /> }, // Route for editing an existing design
       { path: "booking", element: <BookingIndex /> },
     ],
   },

@@ -32,7 +32,11 @@ export const signup = async (full_name, contact_number, username, email, passwor
 // Function to fetch all registered customers (For admin panel)
 export const getCustomers = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/all`);
+    const response = await axios.get(`${BASE_URL}/view_customers`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return response.data;
   } catch (error) {
     throw error.response?.data?.message || 'Failed to fetch customers.';

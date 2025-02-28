@@ -1,14 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { useDeleteDesign, useGetList } from "./query";
+import { useEffect } from "react";
+import "../../../styles/DesignIndex.css";
 
 function DesignIndex() {
   const { data: designList, refetch } = useGetList();
   const deleteApi = useDeleteDesign();
   const navigate = useNavigate();
 
+  // Refetch design list when this component is loaded
+  useEffect(() => {
+    refetch(); // Fetch updated list after navigation
+  }, [refetch]);
+
   const deleteItem = (id) => {
     if (!id) return;
-    deleteApi.mutate(id, { onSuccess: refetch });
+    deleteApi.mutate(id, {
+      onSuccess: () => {
+        refetch(); // Re-fetch the list after deletion
+      },
+    });
   };
 
   return (
@@ -24,9 +35,9 @@ function DesignIndex() {
           </button>
           <button
             className="btn-add"
-            onClick={() => navigate("/admin/design/new")}
+            onClick={() => navigate("/admin/design/create")}
           >
-            Add New Design
+             Add New Design
           </button>
         </div>
       </div>
@@ -56,13 +67,13 @@ function DesignIndex() {
                   className="btn-edit"
                   onClick={() => navigate(`/admin/design/${design.id}`)}
                 >
-                  Edit
+                  ✏️ Edit
                 </button>
                 <button
                   className="btn-delete"
                   onClick={() => deleteItem(design.id)}
                 >
-                  Delete
+                  ❌ Delete
                 </button>
               </td>
             </tr>
