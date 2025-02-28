@@ -7,17 +7,12 @@ function Footer() {
     return (
         <footer>
             <div className="footer1">
-            <Link to="#" onClick={() => window.scrollTo({ top: document.querySelector('.navbar').offsetTop, behavior: 'smooth' })}>Back to top</Link>
+                <Link to="#" onClick={() => window.scrollTo({ top: document.querySelector('.navbar').offsetTop, behavior: 'smooth' })}>
+                    Back to top
+                </Link>
             </div>
 
             <div className="footer2">
-                <ul>
-                    <p id="helpSupport">Help & Support</p>
-                    <a href="#">Terms and Conditions</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Return Policy</a>
-                </ul>
 
                 <ul>
                     <p id="contactUs">Contact Us</p>
@@ -29,10 +24,10 @@ function Footer() {
 
                 <ul>
                     <p>Follow Us</p>
-                    <a href="#"><FaFacebook /> Facebook</a>
-                    <a href="#"><FaInstagram /> Instagram</a>
-                    <a href="#"><FaPinterest /> Pinterest</a>
-                    <a href="#"><FaYoutube /> YouTube</a>
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /> Facebook</a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /> Instagram</a>
+                    <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer"><FaPinterest /> Pinterest</a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><FaYoutube /> YouTube</a>
                 </ul>
             </div>
 
