@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useGetById, useSaveDesign, useUpdateDesign } from "./query";
-import "../../../styles/AdminDesignForm.css";
+import { useSaveDesign, useUpdateDesign, useGetById } from "./query";
+import { useParams, useNavigate } from "react-router-dom";
+import "../../../styles/DesignForm.css";
 
 function DesignForm() {
   const { id } = useParams(); // Extract the `id` parameter from the URL
@@ -70,7 +70,7 @@ function DesignForm() {
       saveApi.mutate(dataToSend, {
         onSuccess: () => {
           alert("Design created successfully!");
-          reset(); // Reset the form
+          reset(); // Reset the form after success
           navigate("/admin/design"); // Navigate back to the design list
         },
         onError: (error) => {

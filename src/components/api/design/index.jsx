@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDeleteDesign, useGetList } from "./query";
-import { useEffect } from "react";
+import { useGetList, useDeleteDesign } from "./query";
 import "../../../styles/DesignIndex.css";
 
 function DesignIndex() {
@@ -47,6 +47,8 @@ function DesignIndex() {
             <th>Name</th>
             <th>Image</th>
             <th>Description</th>
+            <th>Room</th> {/* Added Room column */}
+            <th>Style</th> {/* Added Style column */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -62,10 +64,12 @@ function DesignIndex() {
                 />
               </td>
               <td>{design.description}</td>
+              <td>{design.room}</td> {/* Display Room */}
+              <td>{design.style}</td> {/* Display Style */}
               <td>
                 <button
                   className="btn-edit"
-                  onClick={() => navigate(`/admin/design/edit/${design.id}`)} // Updated this line
+                  onClick={() => navigate(`/admin/design/edit/${design.id}`)}
                 >
                   ✏️ Edit
                 </button>

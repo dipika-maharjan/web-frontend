@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import FrontSection from "./FrontSection";
 import Consultation from "./Consult";
+import "../../../styles/Homepage.css";
 
 const API_BASE_URL = "http://localhost:8080/api/design"; // Replace with your backend URL
 
@@ -43,7 +44,7 @@ const Homepage = () => {
               <h3>{design.title}</h3>
               <p>{design.description}</p>
               <p>
-                <strong>Room:</strong> {design.roomType}
+                <strong>Room:</strong> {design.room}
               </p>
               <p>
                 <strong>Style:</strong> {design.style}
