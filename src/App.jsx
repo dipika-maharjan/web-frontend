@@ -11,20 +11,8 @@ const BookConsultation = lazy(() => import("./components/pages/private/BookConsu
 const Navbar = lazy(() => import("./components/pages/private/Navbar"));
 const Footer = lazy(() => import("./components/pages/private/Footer"));
 
-// Section Pages
-const BedSection = lazy(() => import("./components/pages/private/BedSection"));
-const BohemianSection = lazy(() => import("./components/pages/private/BohemianSection"));
-const BrowseIdea = lazy(() => import("./components/pages/private/BrowseIdea"));
-const BudgetFriendlySection = lazy(() => import("./components/pages/private/BudgetFriendlySection"));
-const DiningSection = lazy(() => import("./components/pages/private/DiningSection"));
+// Section Page
 const FrontSection = lazy(() => import("./components/pages/private/FrontSection"));
-const KitchenSection = lazy(() => import("./components/pages/private/KitchenSection"));
-const LivingSection = lazy(() => import("./components/pages/private/LivingSection"));
-const LuxurySection = lazy(() => import("./components/pages/private/LuxurySection"));
-const MinimalistSection = lazy(() => import("./components/pages/private/MinimalistSection"));
-const OfficeSection = lazy(() => import("./components/pages/private/Office"));
-const RusticSection = lazy(() => import("./components/pages/private/RusticSection"));
-const TraditionalSection = lazy(() => import("./components/pages/private/TraditionalSection"));
 
 // Admin Pages
 const AdminLogin = lazy(() => import("./components/pages/private/AdminLogin"));
@@ -76,19 +64,7 @@ const router = createBrowserRouter([
         children: [
           { path: "profile", element: <Profile /> },
           { path: "bookconsultation", element: <BookConsultation /> },
-          { path: "bedsection", element: <BedSection /> },
-          { path: "bohemiansection", element: <BohemianSection /> },
-          { path: "browseidea", element: <BrowseIdea /> },
-          { path: "budgetfriendly", element: <BudgetFriendlySection /> },
-          { path: "diningsection", element: <DiningSection /> },
           { path: "frontsection", element: <FrontSection /> },
-          { path: "kitchensection", element: <KitchenSection /> },
-          { path: "livingsection", element: <LivingSection /> },
-          { path: "luxurysection", element: <LuxurySection /> },
-          { path: "minimalistsection", element: <MinimalistSection /> },
-          { path: "officesection", element: <OfficeSection /> },
-          { path: "rusticsection", element: <RusticSection /> },
-          { path: "traditionalsection", element: <TraditionalSection /> },
         ]
       }
     ]
