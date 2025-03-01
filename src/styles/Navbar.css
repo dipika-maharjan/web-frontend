@@ -143,12 +143,12 @@
 }
 
 .signup-btn {
-    color: white;
+    color: #B19F6F;
     border: 2px solid white;
-    background: none;
+    background: white;
 }
 
 .signup-btn:hover {
-    background-color: white;
-    color: #B19F6F;
+    background-color: #8C7C4C;
+    color: white;
 }
