@@ -1,9 +1,8 @@
-// src/components/LoginPage.js
 import React, { useState } from 'react';
 import '../../../styles/Login.css';
 import loginImage from '../../../assets/images/login.webp';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../api/api'; // Import the login function from api.js
+import { login } from '../../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,7 +15,7 @@ function LoginPage() {
     event.preventDefault();
 
     try {
-      const { token } = await login(email, password); // Call login function
+      const { token } = await login(email, password); 
       localStorage.setItem('token', token); // Store token
       toast.success('Login Successful!', { position: 'top-center' });
 
